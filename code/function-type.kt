@@ -8,4 +8,6 @@ val increment = makeIncrementer()
 increment(7)
 
 // makeIncrementer can also be written in a shorter way:
+// 语法糖：函数返回值可以用 = 
+// 返回值类型可以省略，编译器能自动推断
 fun makeIncrementer() = fun(number: Int) = 1 + number

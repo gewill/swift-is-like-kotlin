@@ -1,3 +1,4 @@
+// 一模一样，除了名字不同
 interface Nameable {
     fun name(): String
 }

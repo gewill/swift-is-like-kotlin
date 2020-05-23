@@ -1,3 +1,4 @@
+// 构造器直接写在类型的声明中
 open class NamedShape(val name: String) {
     var numberOfSides = 0
 
@@ -7,6 +8,7 @@ open class NamedShape(val name: String) {
 
 class Square(var sideLength: BigDecimal, name: String) :
         NamedShape(name) {
+    // 没有小括号
     init {
         numberOfSides = 4
     }
