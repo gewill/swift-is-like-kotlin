@@ -24,6 +24,9 @@ html
       .case (.name "Variables And Constants") $ .pair
         .card (.lang Swift) $ pre.code $ code (@insert ../code/variables-and-constants.swift)
         .card (.lang Kotlin) $ pre.code $ code (@insert ../code/variables-and-constants.kt)
+      .case (.name "Optional") $ .pair
+        .card (.lang Swift) $ pre.code $ code (@insert ../code/optional.swift)
+        .card (.lang Kotlin) $ pre.code $ code (@insert ../code/optional.kt)
       .case (.name "Explicit Types") $ .pair
         .card (.lang Swift) $ pre.code $ code (@insert ../code/explicit-types.swift)
         .card (.lang Kotlin) $ pre.code $ code (@insert ../code/explicit-types.kt)
