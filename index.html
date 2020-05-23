@@ -10,15 +10,20 @@ val myConstant = 42
 let width = 94
 let widthLabel = label + String(width)</code></pre></div><div class="card"><div class="lang">Kotlin</div><pre class="code"><code>val label = "The width is "
 val width = 94
+// 类型自动转换是Swift不推荐的
 val widthLabel = label + width
 </code></pre></div></div></div><div class="case"><div class="name">String Interpolation</div><div class="pair"><div class="card"><div class="lang">Swift</div><pre class="code"><code>let apples = 3
 let oranges = 5
 let fruitSummary = "I have \(apples + oranges) " +
                    "pieces of fruit."</code></pre></div><div class="card"><div class="lang">Kotlin</div><pre class="code"><code>val apples = 3
 val oranges = 5
+// ${} 和 ES 一样的
 val fruitSummary = "I have ${apples + oranges} " +
                    "pieces of fruit."
-</code></pre></div></div></div><div class="case"><div class="name">Range Operator</div><div class="pair"><div class="card"><div class="lang">Swift</div><pre class="code"><code>let names = ["Anna", "Alex", "Brian", "Jack"]
+</code></pre></div></div></div><div class="case"><div class="name">Range Operator</div><div class="pair"><div class="card"><div class="lang">Swift</div><pre class="code"><code>let closedRange = 0...5
+let halfOpenRange = 0..<5
+
+let names = ["Anna", "Alex", "Brian", "Jack"]
 let count = names.count
 for i in 0..&lt;count {
     print("Person \(i + 1) is called \(names[i])")
@@ -27,7 +32,10 @@ for i in 0..&lt;count {
 // Person 2 is called Alex
 // Person 3 is called Brian
 // Person 4 is called Jack
-</code></pre></div><div class="card"><div class="lang">Kotlin</div><pre class="code"><code>val names = arrayOf("Anna", "Alex", "Brian", "Jack")
+</code></pre></div><div class="card"><div class="lang">Kotlin</div><pre class="code"><code>val closedRange = 0..5
+val halfOpenRange = 0 until 5
+
+val names = arrayOf("Anna", "Alex", "Brian", "Jack")
 val count = names.count()
 for (i in 0..count - 1) {
     println("Person ${i + 1} is called ${names[i]}")
@@ -35,8 +43,7 @@ for (i in 0..count - 1) {
 // Person 1 is called Anna
 // Person 2 is called Alex
 // Person 3 is called Brian
-// Person 4 is called Jack
-</code></pre></div></div></div><div class="case"><div class="name">Inclusive Range Operator</div><div class="pair"><div class="card"><div class="lang">Swift</div><pre class="code"><code>for index in 1...5 {
+// Person 4 is called Jack</code></pre></div></div></div><div class="case"><div class="name">Inclusive Range Operator</div><div class="pair"><div class="card"><div class="lang">Swift</div><pre class="code"><code>for index in 1...5 {
     print("\(index) times 5 is \(index * 5)")
 }
 // 1 times 5 is 5
@@ -53,14 +60,16 @@ for (i in 0..count - 1) {
 // 5 times 5 is 25
 </code></pre></div></div></div></div><div class="section"><div class="title">COLLECTIONS</div><div class="case"><div class="name">Arrays</div><div class="pair"><div class="card"><div class="lang">Swift</div><pre class="code"><code>var shoppingList = ["catfish", "water",
     "tulips", "blue paint"]
-shoppingList[1] = "bottle of water"</code></pre></div><div class="card"><div class="lang">Kotlin</div><pre class="code"><code>val shoppingList = arrayOf("catfish", "water",
+shoppingList[1] = "bottle of water"</code></pre></div><div class="card"><div class="lang">Kotlin</div><pre class="code"><code>// 也是泛型，但是首字母小写
+val shoppingList = arrayOf("catfish", "water",
     "tulips", "blue paint")
 shoppingList[1] = "bottle of water"
 </code></pre></div></div></div><div class="case"><div class="name">Maps</div><div class="pair"><div class="card"><div class="lang">Swift</div><pre class="code"><code>var occupations = [
     "Malcolm": "Captain",
     "Kaylee": "Mechanic",
 ]
-occupations["Jayne"] = "Public Relations"</code></pre></div><div class="card"><div class="lang">Kotlin</div><pre class="code"><code>val occupations = mutableMapOf(
+occupations["Jayne"] = "Public Relations"</code></pre></div><div class="card"><div class="lang">Kotlin</div><pre class="code"><code>// 键值分隔符是 to
+val occupations = mutableMapOf(
     "Malcolm" to "Captain",
     "Kaylee" to "Mechanic"
 )
@@ -119,6 +128,8 @@ val increment = makeIncrementer()
 increment(7)
 
 // makeIncrementer can also be written in a shorter way:
+// 语法糖：函数返回值可以用 = 
+// 返回值类型可以省略，编译器能自动推断
 fun makeIncrementer() = fun(number: Int) = 1 + number
 </code></pre></div></div></div><div class="case"><div class="name">Map</div><div class="pair"><div class="card"><div class="lang">Swift</div><pre class="code"><code>let numbers = [20, 19, 7, 12]
 numbers.map { 3 * $0 }
@@ -127,14 +138,16 @@ numbers.map { 3 * it }
 </code></pre></div></div></div><div class="case"><div class="name">Sort</div><div class="pair"><div class="card"><div class="lang">Swift</div><pre class="code"><code>var mutableArray = [1, 5, 3, 12, 2]
 mutableArray.sort()
 </code></pre></div><div class="card"><div class="lang">Kotlin</div><pre class="code"><code>listOf(1, 5, 3, 12, 2).sorted()
-</code></pre></div></div></div><div class="case"><div class="name">Named Arguments</div><div class="pair"><div class="card"><div class="lang">Swift</div><pre class="code"><code>func area(width: Int, height: Int) -> Int {
-    return width * height
+</code></pre></div></div></div><div class="case"><div class="name">Named Arguments</div><div class="pair"><div class="card"><div class="lang">Swift</div><pre class="code"><code>func area(_ width: Int, height h: Int) -> Int {
+    return width * h
 }
-area(width: 2, height: 3)
+// 还是Swift比较规范，区分形参和实参
+// 当形参为_时，才可以省略
+area(2, height: 3)
 </code></pre></div><div class="card"><div class="lang">Kotlin</div><pre class="code"><code>fun area(width: Int, height: Int) = width * height
 area(width = 2, height = 3)
 
-// This is also possible with named arguments
+// 形参可以省略，IDE会用灰色字体显示
 area(2, height = 2)
 area(height = 3, width = 2)
 </code></pre></div></div></div></div><div class="section"><div class="title">CLASSES</div><div class="case"><div class="name">Declaration</div><div class="pair"><div class="card"><div class="lang">Swift</div><pre class="code"><code>class Shape {
@@ -187,7 +200,8 @@ class Square: NamedShape {
 let test = Square(sideLength: 5.2, name: "square")
 test.area()
 test.simpleDescription()
-</code></pre></div><div class="card"><div class="lang">Kotlin</div><pre class="code"><code>open class NamedShape(val name: String) {
+</code></pre></div><div class="card"><div class="lang">Kotlin</div><pre class="code"><code>// 构造器直接写在类型的声明中
+open class NamedShape(val name: String) {
     var numberOfSides = 0
 
     open fun simpleDescription() =
@@ -196,6 +210,7 @@ test.simpleDescription()
 
 class Square(var sideLength: BigDecimal, name: String) :
         NamedShape(name) {
+    // 没有小括号
     init {
         numberOfSides = 4
     }
@@ -221,11 +236,13 @@ for item in library {
 }</code></pre></div><div class="card"><div class="lang">Kotlin</div><pre class="code"><code>var movieCount = 0
 var songCount = 0
 
+// 所有控制语句的条件都有小括号
 for (item in library) {
     if (item is Movie) {
+        // 仍支持C风格的++
         ++movieCount
     } else if (item is Song) {
-        ++songCount
+        songCount += 1
     }
 }
 </code></pre></div></div></div><div class="case"><div class="name">Pattern Matching</div><div class="pair"><div class="card"><div class="lang">Swift</div><pre class="code"><code>let nb = 42
@@ -237,6 +254,9 @@ switch nb {
     default: print("four or more digits")
 }
 </code></pre></div><div class="card"><div class="lang">Kotlin</div><pre class="code"><code>val nb = 42
+// 单值匹配不使用关键词，使用 -> 作为分隔符
+// 多值匹配使用in
+// 默认值关键字是else
 when (nb) {
     in 0..7, 8, 9 -> println("single digit")
     10 -> println("double digits")
@@ -251,6 +271,7 @@ when (nb) {
     }
 }
 </code></pre></div><div class="card"><div class="lang">Kotlin</div><pre class="code"><code>for (current in someObjects) {
+    // 类型转换不需要绑定新的变量
     if (current is Movie) {
         println("Movie: '${current.name}', " +
 	    "dir. ${current.director}")
@@ -263,7 +284,8 @@ when (nb) {
 func f&lt;T: Nameable>(x: T) {
     print("Name is " + x.name())
 }
-</code></pre></div><div class="card"><div class="lang">Kotlin</div><pre class="code"><code>interface Nameable {
+</code></pre></div><div class="card"><div class="lang">Kotlin</div><pre class="code"><code>// 一模一样，除了名字不同
+interface Nameable {
     fun name(): String
 }
 
@@ -283,7 +305,9 @@ print("One inch is \(oneInch) meters")
 let threeFeet = 3.ft
 print("Three feet is \(threeFeet) meters")
 // prints "Three feet is 0.914399970739201 meters"
-</code></pre></div><div class="card"><div class="lang">Kotlin</div><pre class="code"><code>val Double.km: Double get() = this * 1000
+</code></pre></div><div class="card"><div class="lang">Kotlin</div><pre class="code"><code>// 少了Extension关键字
+// 直接在变量或者函数前加类型名
+val Double.km: Double get() = this * 1000
 val Double.m: Double get() = this
 val Double.cm: Double get() = this / 100
 val Double.mm: Double get() = this / 1000
@@ -295,4 +319,12 @@ println("One inch is $oneInch meters")
 val threeFeet = 3.0.ft
 println("Three feet is $threeFeet meters")
 // prints "Three feet is 0.914399970739201 meters"
-</code></pre></div></div></div></div></body></html>
+
+fun MutableList<Int>.swap(index1: Int, index2: Int) {
+    val tmp = this[index1] // 'this' corresponds to the list
+    this[index1] = this[index2]
+    this[index2] = tmp
+}
+val list = mutableListOf(1, 2, 3)
+list.swap(0, 2) 
+// 'this' inside 'swap()' will hold the value of 'list'</code></pre></div></div></div></div></body></html>
